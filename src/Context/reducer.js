@@ -1,12 +1,6 @@
 export const initialState={
-    basket:[{
-        id:"1",
-              title:"OnePlus 7 Pro (Mirror Grey, 8GB RAM, Fluid AMOLED Display, 256GB Storage, 4000mAH Battery)",
-              price:649,
-              rating:4,
-              image:"https://fdn2.gsmarena.com/vv/pics/oneplus/oneplus-6-5.jpg"
-    }],
-    user:null,
+    basket:[],
+    user:null
 }; 
 
 export const getBasketTotal = (basket) =>
@@ -16,6 +10,12 @@ export const getBasketTotal = (basket) =>
 function reducer(state, action){
     
     switch(action.type){
+
+        case "SET_USER":
+            return{
+              ...state,
+              user: action.user
+            }
         case "ADD_TO_BASKET":
             return {
                 // return current state plus action taken 
@@ -23,7 +23,7 @@ function reducer(state, action){
                 basket:[...state.basket, action.item]
             
             };
-            break
+           
 
         case "REMOVE_FROM_BASKET":
             // copy basket item onto another
@@ -44,7 +44,7 @@ function reducer(state, action){
                 ...state,
                 basket: newbasket
             }
-            break
+            
         
             default:
                 return state
